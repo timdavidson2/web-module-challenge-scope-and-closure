@@ -84,12 +84,17 @@ For example: invoking finalScore(inning, 9) might return this object:
 */ 
 
 function finalScore(inningCB, inn){
-    return{
-      Home: inningCB() * inn,
-      Away: inningCB() * inn
+    let score = {
+      Home:  0,
+      Away:  0
     }
+    for(let i = 0; i < inn; i++){
+      score.Home += inningCB();
+      score.Away += inningCB();
+  }
+  return score;
 }
-console.log(finalScore(inning, 8))
+console.log(finalScore(inning, 6))
 
 
 /* Task 4: 
@@ -97,19 +102,14 @@ console.log(finalScore(inning, 8))
 // the function should take the inning function as an argument 
 // it should return an object with with a score for home and a score for away that that populates from invoking the inning callback. */
 
-function getInningScore(inningCB,scoreCB) {
-  const getInning = [];
-  let homeScore = 0;
-  let awayScore = 0;
-  for(let i = 0; i < 9; i++){
-    const currentScore = inningCB(scoreCB)
-    homeScore = homeScore + currentScore.Home
-    awayScore = awayScore + currentScore.Away
-    getInning.push(`Inning ${i + 1}: Away ${currentScore.Away} - Home ${currentScore.Home}`)
+function getInningScore(inningCB) {
+   
+  return{
+    Home: inningCB(),
+    Away: inningCB() 
   }
-    return getInning;
 }
-  console.log(getInningScore(inning, finalScore));
+  console.log(getInningScore(inning, 7));
 
 /* Task 5: scoreboard()
 Use the scoreboard function below to do the following:
@@ -155,19 +155,19 @@ Use the scoreboard function below to do the following:
   */
 
 
-function scoreboard(/* CODE HERE */) {
-  const getInning = [];
+function scoreboard(inningCB, getInningScoreCB, innPlayed) {
+  const final = [];
   let homeScore = 0;
   let awayScore = 0;
-  for(let i = 0; i < 9; i++){
-    const currentScore = inningCB(scoreCB)
-    homeScore = homeScore + currentScore.Home
-    awayScore = awayScore + currentScore.Away
-    getInning.push(`Inning ${i + 1}: Away ${currentScore.Away} - Home ${currentScore.Home}`)
+  for(let i = 0; i < innPlayed; i++){
+    const currentScore = inningCB(getInningScoreCB)
+    homeScore += homeScore + currentScore.Home;
+    awayScore += awayScore + currentScore.Away;
+    final.push(`Inning ${i + 1}: Away ${currentScore.Away} - Home ${currentScore.Home}`)
   }
-    return getInning;
+    return final;
 }
-  console.log(getInningScore(inning, finalScore));/* CODE HERE */
+  console.log(scoreboard(getInningScore, inning, 7));/* CODE HERE */
 
 
 
