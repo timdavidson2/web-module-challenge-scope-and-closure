@@ -101,8 +101,8 @@ function getInningScore(inningCB,scoreCB) {
   const getInning = [];
   let homeScore = 0;
   let awayScore = 0;
-  for(let i = 0; i <= 9; i++){
-    const currentScore = finalScoreCB(inningCB)
+  for(let i = 0; i < 9; i++){
+    const currentScore = inningCB(scoreCB)
     homeScore = homeScore + currentScore.Home
     awayScore = awayScore + currentScore.Away
     getInning.push(`Inning ${i + 1}: Away ${currentScore.Away} - Home ${currentScore.Home}`)
@@ -156,8 +156,19 @@ Use the scoreboard function below to do the following:
 
 
 function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+  const getInning = [];
+  let homeScore = 0;
+  let awayScore = 0;
+  for(let i = 0; i < 9; i++){
+    const currentScore = inningCB(scoreCB)
+    homeScore = homeScore + currentScore.Home
+    awayScore = awayScore + currentScore.Away
+    getInning.push(`Inning ${i + 1}: Away ${currentScore.Away} - Home ${currentScore.Home}`)
+  }
+    return getInning;
 }
+  console.log(getInningScore(inning, finalScore));/* CODE HERE */
+
 
 
 
